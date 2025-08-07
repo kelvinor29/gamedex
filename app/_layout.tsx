@@ -1,29 +1,49 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import { Inter_400Regular, useFonts as useInter } from '@expo-google-fonts/inter';
+import { Quicksand_600SemiBold, Quicksand_700Bold, useFonts as useQuicksand } from '@expo-google-fonts/quicksand';
+import { Satisfy_400Regular, useFonts as useSatisfy } from '@expo-google-fonts/satisfy';
+import { useColorScheme, View } from 'react-native';
+import { ActivityIndicator, PaperProvider } from 'react-native-paper';
+import { darkTheme, lightTheme } from '../theme/paperTheme';
+
+import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { Slot } from 'expo-router';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+    // Get current color scheme
+    const scheme = useColorScheme();
+    const currentTheme = scheme === "dark" ? darkTheme : lightTheme;
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    const { loading } = useAuth();
+
+    // Load fonts
+    const [quicksandLoaded] = useQuicksand({ Quicksand_700Bold, Quicksand_600SemiBold });
+    const [interLoaded] = useInter({ Inter_400Regular });
+    const [satisfyLoaded] = useSatisfy({ Satisfy_400Regular });
+
+    const allFontsLoaded = quicksandLoaded && interLoaded && satisfyLoaded;
+
+    // Check if the fonts are not fully loaded yet
+    // and check if there is a user already logged
+    if (!allFontsLoaded || !loading) {
+        return (
+            <PaperProvider theme={currentTheme}>
+                <View className='flex-1 justify-center items-center' style={{ backgroundColor: currentTheme.colors.background }}>
+                    <ActivityIndicator size="large" />
+                </View>
+            </PaperProvider>
+        )
+    }
+
+    return (
+        <PaperProvider theme={currentTheme}>
+            <AuthProvider>
+                <View className='flex-1' style={{ backgroundColor: currentTheme.colors.background }}>
+                    <Slot />
+                </View>
+            </AuthProvider>
+        </PaperProvider>
+    );
 }
+
