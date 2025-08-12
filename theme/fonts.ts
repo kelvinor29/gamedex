@@ -1,9 +1,9 @@
 import { configureFonts } from 'react-native-paper';
 
 export const fontConfig = {
-    displayHuge: {
+    displayLarge: {
         fontFamily: 'Satisfy_400Regular',
-        fontSize: 48,
+        fontSize: 57,
         lineHeight: 54
     },
     displayFancy: {
@@ -11,19 +11,14 @@ export const fontConfig = {
         fontSize: 24,
         lineHeight: 30,
     },
-    displayLarge: {
-        fontFamily: 'Quicksand_700Bold',
-        fontSize: 34,
-        lineHeight: 40,
-    },
     displayMedium: {
         fontFamily: 'Quicksand_600SemiBold',
         fontSize: 32,
         lineHeight: 38,
     },
     headlineLarge: {
-        fontFamily: 'Quicksand_700Bold',
-        fontSize: 18,
+        fontFamily: 'Satisfy_400Regular',
+        fontSize: 32,
         lineHeight: 24,
     },
     headlineMedium: {

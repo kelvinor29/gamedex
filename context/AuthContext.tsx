@@ -1,46 +1,63 @@
 import { router } from 'expo-router';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { auth } from '../firebaseConfig';
 
 type AuthContextType = {
     user: User | null,
-    loading: boolean,
-    logout: () => void
+    verifyingUser: boolean,
+    logout: () => void,
+    signIn: (email: string, password: string) => Promise<void>,
+    signUp: (email: string, password: string) => Promise<void>,
 }
 
-export const AuthContext = createContext<AuthContextType>({
-    user: null,
-    loading: true,
-    logout: () => { }
-})
+// Create context
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => useContext(AuthContext);
+// Hook 
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) throw new Error('useAuth must be used within an AuthProvider');
+    return context;
+}
 
+// Provider
 export function AuthProvider({ children }: PropsWithChildren) {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [verifyingUser, setVerifyingUser] = useState<boolean>(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-
             setUser(firebaseUser);
-            setLoading(false);
-
-            if(firebaseUser) router.replace('/home/home');
-            else router.replace('/login')
+            setVerifyingUser(false);
         });
 
         return unsubscribe;
     }, []);
 
-    const logout = () => {
-        auth.signOut();
+    useEffect(() => {
+        if (!verifyingUser) {
+            if (user) {
+                router.replace('/home/home');
+            } else {
+                router.replace('/login');
+            }
+        }
+    }, [user, verifyingUser]);
+
+    const signIn = async (email: string, password: string) => {
+        await signInWithEmailAndPassword(auth, email, password);
     }
 
+    const signUp = async (email: string, password: string) => {
+        await createUserWithEmailAndPassword(auth, email, password);
+    }
+
+    const logout = () => signOut(auth);
+
     return (
-        <AuthContext.Provider value={{ user, loading, logout }}>
+        <AuthContext.Provider value={{ user, verifyingUser, logout, signIn, signUp }}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }

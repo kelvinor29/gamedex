@@ -3,15 +3,15 @@ import { colors } from './colors';
 import { fonts } from './fonts';
 
 export const BORDER_RADIUS_LG = 12;
-export const BORDER_RADIUS_MD = 8;
-export const BORDER_RADIUS_SM = 5;
-
 export const createTheme = (mode: 'light' | 'dark') => {
     const baseTheme = mode === 'light' ? MD3LightTheme : MD3DarkTheme;
     const colorSet = colors[mode];
 
     return {
         ...baseTheme,
+        roundness: BORDER_RADIUS_LG,
+
+        // Global colors
         colors: {
             ...baseTheme.colors,
             primary: colors.primary,
@@ -19,13 +19,10 @@ export const createTheme = (mode: 'light' | 'dark') => {
             background: colorSet.background,
             surface: colorSet.accent,
             onSurface: colorSet.text,
-            text: colorSet.text,
             outline: colorSet.textSecondary,
             onBackground: colorSet.text,
             error: colorSet.error,
             onError: colorSet.onError,
-
-            white: colors.white,
         },
         fonts: fonts,
     };

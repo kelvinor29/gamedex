@@ -1,11 +1,17 @@
 {
   "expo": {
-    "name": "gamequiz",
-    "slug": "gamequiz",
+    "name": "GameDex",
+    "slug": "GameDex",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "gamequiz",
+    "orientation": "default",
+    "icon": "./assets/logo/gamedex-icon-transparent.png",
+    "splash": {
+      "image": "./assets/logo/gamedex-transparent.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#252525",
+      "autoHide": false
+    },
+    "scheme": "GameDex",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -13,8 +19,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/logo/gamedex-transparent.png",
+        "backgroundColor": "#252525"
       },
       "edgeToEdgeEnabled": true
     },
@@ -28,10 +34,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/logo/gamedex-transparent.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#252525"
         }
       ],
       "expo-font"

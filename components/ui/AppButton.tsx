@@ -7,7 +7,7 @@ type AppButtonProps = {
     mode?: 'contained' | 'text';
     colorType?: 'primary' | 'secondary';
     disabled?: boolean;
-    children: ReactNode;
+    children?: ReactNode;
     loading?: boolean;
     onPress: () => void;
 };
@@ -18,19 +18,22 @@ const AppButton = ({
     disabled = false,
     children,
     loading = false,
-    onPress }: AppButtonProps) => {
+    onPress,
+}: AppButtonProps) => {
 
     const theme = useTheme();
 
     const backgroundColor =
         mode === 'contained'
             ? colorType === 'secondary'
-                ? theme.colors.secondary
+                ? theme.colors.surface
                 : theme.colors.primary
             : 'transparent';
 
     const textColor =
-        mode === 'contained' ? colors.white : theme.colors.primary;
+        mode === 'contained'
+            ? colors.white
+            : theme.colors.primary;
 
     return (
         <Button
@@ -42,11 +45,11 @@ const AppButton = ({
             buttonColor={backgroundColor}
             contentStyle={{
                 paddingVertical: 4,
-                paddingHorizontal: 8,
+                paddingHorizontal: 8
             }}
             labelStyle={theme.fonts.bodyMedium}
-            style={{ borderRadius: BORDER_RADIUS_LG }}
-        >
+            style={
+                { borderRadius: BORDER_RADIUS_LG, }}>
             {children}
         </Button>
     );
