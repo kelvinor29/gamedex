@@ -2,8 +2,9 @@ export const colors = {
 
     primary: '#C53F4E',
     secondary: '#505050',
-    tertiary: '#505050',
+    tertiary: 'rgba(80, 80, 80, 0.7)',
     white: '#ffffff',
+    yellow: '#FFC107',
 
     light: {
         text: '#1A1A1A',

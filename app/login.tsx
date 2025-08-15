@@ -41,24 +41,24 @@ const Login = () => {
     return (
 
         <View
-            className='flex-1 px-4'
+            className='flex-1'
             style={{ backgroundColor: colors.background }}>
 
             {/* Adjust the view so that the keyboard doesn't cover important content */}
             <KeyboardAvoidingView
                 className='flex-1'
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior="padding"
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
 
                 <ScrollView
                     className='flex-1'
-                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
-                    keyboardShouldPersistTaps="handled"
-                >
+                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center'}}
+                    keyboardShouldPersistTaps="handled" >
+                        
                     {/* Close the keyboard when the user touches another part of the screen */}
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
-                        <View className="w-full justify-center landscape:flex-row landscape:items-center">
+                        <View className="w-full justify-center landscape:flex-row landscape:items-center px-4">
 
                             {/* Logo Section */}
                             <View className="relative items-center justify-center portrait:mb-5 landscape:flex-1">

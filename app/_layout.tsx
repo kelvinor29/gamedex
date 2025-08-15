@@ -1,4 +1,4 @@
-import CustomDrawerContent from "@/components/ui/AppDrawer";
+import CustomDrawerContent from "@/components/nav/AppDrawer";
 import AppIconButton from "@/components/ui/AppIconButton";
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { Inter_400Regular } from '@expo-google-fonts/inter';
@@ -37,12 +37,7 @@ export function RootLayout() {
     const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
     // Load fonts
-    const [fontsLoaded] = useFonts({
-        Inter_400Regular,
-        Quicksand_600SemiBold,
-        Quicksand_700Bold,
-        Satisfy_400Regular,
-    });
+    const [fontsLoaded] = useFonts({ Inter_400Regular, Quicksand_600SemiBold, Quicksand_700Bold, Satisfy_400Regular });
 
     // Check if the fonts are not fully loaded yet
     // and check if there is a user already logged
@@ -68,8 +63,10 @@ export function RootLayout() {
                             onLogout={logout}
                         />
                     )}
-                    screenOptions={({ navigation }) => ({
-                        headerShown: true,
+                    screenOptions={({ navigation, route }) => ({
+                        // Hide the header and disable the swipe gesture for the login screen
+                        headerShown: route.name !== 'login' ,
+                        swipeEnabled: route.name !== 'login',
                         headerTitleAlign: 'center',
                         headerLeft: () => (
                             <AppIconButton
@@ -98,8 +95,9 @@ export function RootLayout() {
                                 </View>
                             )
                         },
-                    })}
-                />
+                    })}>
+
+                </Drawer>
             </PaperProvider>
         </GestureHandlerRootView>
     );

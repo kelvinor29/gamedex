@@ -9,7 +9,7 @@ type FormInputProps = {
     control: Control<any>;
     rules?: any;
     secureTextEntry?: boolean;
-
+    forceTextInput?: boolean;
 };
 
 const FormInput = ({ name, label, control, rules, secureTextEntry = false }: FormInputProps) => {

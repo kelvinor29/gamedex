@@ -6,7 +6,7 @@ const Game = () => {
     const { colors } = useTheme();
 
     return (
-        <View className='p-5' style={{ backgroundColor: colors.background, flex: 1 }}>
+        <View className='p-5 flex-1' style={{ backgroundColor: colors.background }}>
             <Text variant='displayMedium' className='text-center'>Game</Text>
         </View>
     )
