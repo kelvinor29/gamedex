@@ -5,11 +5,11 @@ import { getReactNativePersistence, initializeAuth } from 'firebase/auth';
 // Firebase configuration
 const firebaseConfig = {
     apiKey: process.env.EXPO_PUBLIC_FIREBASE_AUTH_KEY,
-    authDomain: "gamedex-f515d.firebaseapp.com",
-    projectId: "gamedex-f515d",
-    storageBucket: "gamedex-f515d.firebasestorage.app",
-    messagingSenderId: "947420099940",
-    appId: "1:947420099940:web:7956c71826b77ef2e4f671"
+    authDomain: "gamedex-d9492.firebaseapp.com",
+    projectId: "gamedex-d9492",
+    storageBucket: "gamedex-d9492.firebasestorage.app",
+    messagingSenderId: "778520582562",
+    appId: "1:778520582562:web:e9576e1532a30579487afb"
 };
 
 const app = initializeApp(firebaseConfig);
