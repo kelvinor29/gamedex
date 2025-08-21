@@ -1,4 +1,4 @@
-import { colors } from '@/theme/colors';
+import { useThemeStore } from '@/store/useThemeStore';
 import { FontAwesome6, MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { Image, ImageSourcePropType, View } from 'react-native';
@@ -45,6 +45,7 @@ const AppIconListCardGame = ({
     color = 'white',
     horizontal = false
 }: IIconsListProps) => {
+    const { currentTheme } = useThemeStore();
 
     // Avoid duplicate icons
     const renderedIconNames = new Set<string>();
@@ -67,7 +68,7 @@ const AppIconListCardGame = ({
                     return (
                         <View
                             className='rounded-xl w-6 h-6 justify-center items-center'
-                            style={{ backgroundColor: colors.tertiary }}
+                            style={{ backgroundColor: currentTheme.tertiary }}
                             key={i}>
                             <Image
                                 source={IconComponent}
@@ -85,7 +86,7 @@ const AppIconListCardGame = ({
                 return (
                     <View
                         className='rounded-xl w-6 h-6 justify-center items-center'
-                        style={{ backgroundColor: colors.tertiary }}
+                        style={{ backgroundColor: currentTheme.tertiary }}
                         key={i}>
 
                         <VectorIcon

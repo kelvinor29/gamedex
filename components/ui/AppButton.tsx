@@ -1,7 +1,8 @@
-import { colors } from '@/theme/colors';
+import { useThemeStore } from '@/store/useThemeStore';
+import { fontConfig } from '@/theme/fonts';
 import { BORDER_RADIUS_LG } from '@/theme/paperTheme';
 import React, { ReactNode } from 'react';
-import { Button, useTheme } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 type AppButtonProps = {
     mode?: 'contained' | 'text';
@@ -21,19 +22,19 @@ const AppButton = ({
     onPress,
 }: AppButtonProps) => {
 
-    const theme = useTheme();
+    const { currentTheme } = useThemeStore();
 
     const backgroundColor =
         mode === 'contained'
             ? colorType === 'secondary'
-                ? theme.colors.surface
-                : theme.colors.primary
+                ? currentTheme.accent
+                : currentTheme.primary
             : 'transparent';
 
     const textColor =
         mode === 'contained'
-            ? colors.white
-            : theme.colors.primary;
+            ? currentTheme.white
+            : currentTheme.primary;
 
     return (
         <Button
@@ -47,7 +48,7 @@ const AppButton = ({
                 paddingVertical: 4,
                 paddingHorizontal: 8
             }}
-            labelStyle={theme.fonts.bodyMedium}
+            labelStyle={fontConfig.bodyMedium}
             style={
                 { borderRadius: BORDER_RADIUS_LG, }}>
             {children}

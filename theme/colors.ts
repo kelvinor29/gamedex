@@ -1,21 +1,31 @@
+
 export const colors = {
-
-    primary: '#C53F4E',
-    secondary: '#505050',
-    tertiary: 'rgba(80, 80, 80, 0.7)',
-    white: '#ffffff',
-    yellow: '#FFC107',
-
     light: {
+        primary: '#C53F4E',
+        secondary: '#505050',
+        tertiary: 'rgba(80, 80, 80, 0.7)',
+        white: '#ffffff',
+        yellow: '#FFC107',
         text: '#1A1A1A',
         textSecondary: '#B6B8C5',
-        background: '#f9f9f9',
+        background: '#B6B8C5',
         backgroundSecondary: '#ffffff',
         accent: '#ffffff',
         onError: '#C53F4E',
         error: '#E75A6A',
+        red_transp_03: 'rgba(255, 71, 87, 0.2)',
+        red_light: '#FF606D',
+        success: '#0D9313',
+
+        grandientOne: 'rgba(200, 200, 200, 0.7)',
+        grandientTwo: 'rgba(200, 200, 200, 0.4)',
     },
     dark: {
+        primary: '#C53F4E',
+        secondary: '#505050',
+        tertiary: 'rgba(80, 80, 80, 0.7)',
+        white: '#ffffff',
+        yellow: '#FFC107',
         text: '#f9f9f9',
         textSecondary: '#B6B8C5',
         background: '#1A1A1A',
@@ -23,5 +33,11 @@ export const colors = {
         accent: '#2D2D2D',
         onError: '#E75A6A',
         error: '#C53F4E',
+        red_transp_03: 'rgba(255, 71, 87, 0.2)',
+        red_light: '#FF606D',
+        success: '#0D9313',
+
+        grandientOne: 'rgba(0, 0, 0, 0.8)',
+        grandientTwo: 'rgba(0, 0, 0, 0.5)',
     },
 };

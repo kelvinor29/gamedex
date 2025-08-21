@@ -1,21 +1,22 @@
 import PlatformIcons from '@/components/ui/AppPlatformIcons';
-import { IGame } from '@/store/useGameStore';
-import { colors as colorsApp } from '@/theme/colors';
+import { IGame } from '@/interfaces/IGame';
+import { useThemeStore } from '@/store/useThemeStore';
 import { BORDER_RADIUS_LG } from '@/theme/paperTheme';
 import { FontAwesome } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useMemo } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 
 interface AppGameCardProps {
     game: IGame;
     styles?: StyleProp<ViewStyle>;
+    isPortrait?: boolean;
 }
 
-const AppGameCard = ({ game, styles }: AppGameCardProps) => {
-    const { colors } = useTheme();
+const AppGameCard = ({ game, styles, isPortrait = false }: AppGameCardProps) => {
+    const { currentTheme } = useThemeStore();
 
     // Avoid create strings/arrays per render
     const genresTextMemo = useMemo(() =>
@@ -24,23 +25,23 @@ const AppGameCard = ({ game, styles }: AppGameCardProps) => {
     );
 
     // Way to optimize images
-    // const optimizedImage = useMemo(() => {
-    //     return game.background_image.replace('/media/', `/media/crop/600/400/`);
-    // }, [game.background_image]);
+    const optimizedImage = useMemo(() => {
+        // Validate if the game has an img
+        if (!game.background_image) return ''
+        return game.background_image.replace('/media/', `/media/crop/600/400/`);
+    }, [game.background_image]);
 
     const tagsMemo = useMemo(() => game.tags, [game.tags]);
     const platformsMemo = useMemo(() => game.parent_platforms, [game.parent_platforms]);
 
     return (
         <View
-            className="rounded-2xl overflow-hidden shadow-lg relative h-[240px] p-1"
-            style={[{ backgroundColor: colors.surfaceVariant }, styles]}>
+            className="
+            rounded-2xl overflow-hidden shadow-lg relative p-1 
+            portrait:h-[240px] landscape:h-[220px] "
+            style={[{ backgroundColor: currentTheme.accent, flex: isPortrait ? 1 : 0 }, styles]}>
             <Image
-                // source={{ uri: optimizedImage }}
-                // source={{ uri: game.background_image }}
-                // source={{ uri: optimizeImageUrl(game.background_image) }}
-                // className="w-full h-full rounded-xl"
-                source={game.background_image}
+                source={{ uri: optimizedImage }}
                 style={{ width: '100%', height: '100%', borderRadius: BORDER_RADIUS_LG }}
                 contentFit='cover'
                 transition={300}
@@ -67,12 +68,18 @@ const AppGameCard = ({ game, styles }: AppGameCardProps) => {
 
                     <View className="flex-row justify-between items-center">
                         {/* Name game */}
-                        <Text variant="headlineMedium" className="text-white text-lg font-bold">{game.name}</Text>
+                        <Text variant="headlineMedium"
+                            className="text-lg font-bold"
+                            numberOfLines={1}
+                            ellipsizeMode='tail'
+                            style={{ flexShrink: 1, color: currentTheme.white }}>
+                            {game.name}
+                        </Text>
 
                         {/* Rating */}
                         <View className="flex-row items-center">
-                            <FontAwesome name="star" size={14} color={colorsApp.yellow} style={{ marginRight: 4 }} />
-                            <Text variant='bodySmall' className="text-white">
+                            <FontAwesome name="star" size={14} color={currentTheme.yellow} style={{ marginRight: 4 }} />
+                            <Text variant='bodySmall' style={{ color: currentTheme.white }}>
                                 {game.rating} ({game.ratings_count})
                             </Text>
                         </View>
@@ -80,12 +87,12 @@ const AppGameCard = ({ game, styles }: AppGameCardProps) => {
 
                     <View className='flex-row justify-between items-center'>
                         {/* Gender */}
-                        <Text variant='bodySmall' className="text-gray-200 mt-1">
+                        <Text variant='bodySmall' className=" mt-1" style={{ color: currentTheme.white }}>
                             {genresTextMemo}
                         </Text>
 
                         {/* Downloads */}
-                        <Text variant='labelLarge' className="text-gray-300">{game.reviews_count} Downloads</Text>
+                        <Text variant='labelLarge' style={{ color: currentTheme.white }}>{game.reviews_count} Downloads</Text>
                     </View>
                 </LinearGradient>
 

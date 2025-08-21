@@ -1,10 +1,11 @@
-import FormInput from '@/components/form/FormInput'
+import AppInput from '@/components/form/AppInput'
 import AppButton from '@/components/ui/AppButton'
 import { useAuth } from '@/context/AuthContext'
+import { useThemeStore } from '@/store/useThemeStore'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Image, Keyboard, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, View } from 'react-native'
-import { ActivityIndicator, Button, Dialog, IconButton, Portal, Text, useTheme } from 'react-native-paper'
+import { ActivityIndicator, Button, Dialog, IconButton, Portal, Text } from 'react-native-paper'
 import "../global.css"
 
 type ControlProps = {
@@ -14,8 +15,7 @@ type ControlProps = {
 
 const Login = () => {
 
-    // Access the current theme colors defined in the app's theme configuration (react-native-paper)
-    const { colors } = useTheme();
+    const { currentTheme } = useThemeStore();
 
     const { signIn } = useAuth();
 
@@ -42,7 +42,7 @@ const Login = () => {
 
         <View
             className='flex-1'
-            style={{ backgroundColor: colors.background }}>
+            style={{ backgroundColor: currentTheme.background }}>
 
             {/* Adjust the view so that the keyboard doesn't cover important content */}
             <KeyboardAvoidingView
@@ -52,9 +52,9 @@ const Login = () => {
 
                 <ScrollView
                     className='flex-1'
-                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center'}}
+                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
                     keyboardShouldPersistTaps="handled" >
-                        
+
                     {/* Close the keyboard when the user touches another part of the screen */}
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -69,15 +69,15 @@ const Login = () => {
 
                             {/* Form Section */}
                             <View className="gap-4 portrait:w-full landscape:flex-1 landscape:pl-4">
-                                <FormInput
+                                <AppInput
                                     name="email"
-                                    label="Email"
+                                    label="Your email..."
                                     control={control}
                                     rules={{ required: 'Email is required' }} />
 
-                                <FormInput
+                                <AppInput
                                     name="password"
-                                    label="Password"
+                                    label="Your password..."
                                     control={control}
                                     rules={{ required: 'Password is required' }}
                                     secureTextEntry />
@@ -109,7 +109,7 @@ const Login = () => {
 
                         {/* Title */}
                         <View className='flex-row justify-center '>
-                            <IconButton icon="shield-alert" iconColor={colors.error} />
+                            <IconButton icon="shield-alert" iconColor={currentTheme.error} />
                         </View>
 
                         <Dialog.Content>

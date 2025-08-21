@@ -1,5 +1,6 @@
+import { useThemeStore } from '@/store/useThemeStore';
 import React from 'react';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
 type AppIconButtonProps = {
     icon?: string;
@@ -13,14 +14,14 @@ const AppIconButton = ({
     onPress
 }: AppIconButtonProps) => {
 
-    const theme = useTheme();
+    const { currentTheme } = useThemeStore();
 
     return (
         <IconButton
             onPress={onPress}
             icon={icon}
-            iconColor={theme.colors.onBackground}
-            containerColor={theme.colors.surface}
+            iconColor={currentTheme.text}
+            containerColor={currentTheme.accent}
             size={28}
             style={[style, { width: 44, height: 44 }]}
         />

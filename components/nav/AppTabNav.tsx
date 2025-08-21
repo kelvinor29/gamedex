@@ -1,25 +1,18 @@
-import { colors } from '@/theme/colors';
-import { BORDER_RADIUS_LG, darkTheme, lightTheme } from "@/theme/paperTheme";
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, useColorScheme, View } from 'react-native';
+import { BORDER_RADIUS_LG } from "@/theme/paperTheme";
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
 
+import { useThemeStore } from '@/store/useThemeStore';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 const AppTabNav = ({ state, descriptors, navigation }: BottomTabBarProps) => {
     // Get current color scheme
-    const systemScheme = useColorScheme();
-    const [isDarkMode, setIsDarkMode] = useState(systemScheme === "dark");
-
-    useEffect(() => {
-        setIsDarkMode(systemScheme === "dark");
-    }, [systemScheme]);
-
-    const theme = isDarkMode ? darkTheme : lightTheme;
+    const { currentTheme } = useThemeStore();
 
     return (
         <View
             style={{
-                backgroundColor: theme.colors.background,
+                backgroundColor: currentTheme.background,
                 borderRadius: BORDER_RADIUS_LG,
             }}
             className="flex flex-row justify-between items-center mx-4 my-3 p-3 shadow-md absolute bottom-0 gap-3">
@@ -42,7 +35,7 @@ const AppTabNav = ({ state, descriptors, navigation }: BottomTabBarProps) => {
                 const icon = options.tabBarIcon
                     ? options.tabBarIcon({
                         focused: isFocused,
-                        color: isFocused ? colors.white : theme.colors.outline,
+                        color: isFocused ? currentTheme.white : currentTheme.textSecondary,
                         size: 24,
                     })
                     : null;
@@ -52,7 +45,7 @@ const AppTabNav = ({ state, descriptors, navigation }: BottomTabBarProps) => {
                         key={route.key}
                         onPress={onPress}
                         style={{
-                            backgroundColor: isFocused ? theme.colors.primary : theme.colors.surface,
+                            backgroundColor: isFocused ? currentTheme.primary : currentTheme.accent,
                             borderRadius: BORDER_RADIUS_LG,
                         }}
                         className="flex-1 p-3 justify-center items-center"

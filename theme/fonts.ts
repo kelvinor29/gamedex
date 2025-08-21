@@ -39,17 +39,13 @@ export const fontConfig = {
     bodySmall: {
         fontFamily: 'Inter_400Regular',
         fontSize: 14,
-        lineHeight: 20,
+        lineHeight: 24,
     },
     labelLarge: {
         fontFamily: 'Inter_400Regular',
         fontSize: 12,
         lineHeight: 18,
     },
-    // labelMedium: {
-    // },
-    // labelSmall: {
-    // },
 };
 
 export const fonts = configureFonts({
