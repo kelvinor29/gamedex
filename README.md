@@ -1,8 +1,12 @@
-# Welcome to your Expo app 👋
+<p align="center">
+  <img src="assets/logo/gamedex-transparent.png" alt="GameDex Logo" width="320" />
+</p>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🎮 Welcome to GameDex ✌️
 
-## Get started
+**GameDex** is a trivia game built with [**Expo**](https://expo.dev) and [**React Native**](https://reactnative.dev).  
+On the **Home screen**, you'll find a list of games displayed as interactive cards. Each card shows the game’s name, image, rating, platforms, and more.
+You can also play a guessing **game mode**, where you’ll try to identify the game shown on screen.
 
 1. Install dependencies
 
@@ -16,8 +20,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
+3. Run on your preferred environment
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
@@ -25,26 +28,30 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## 📂 Project Structure
+This project uses Expo Router for file-based routing
+All screens and components are organized inside the app directory
 
-When you're ready, run:
+## 🛠️ Tech Stack & Development Decisions
+### [`API RAWG.IO`](https://rawg.io/).
+I use the RAWG Video Games Database API to fetch game data (title, images, ratings, platforms, etc)
 
-```bash
-npm run reset-project
-```
+### [`Tanstack Query`](https://tanstack.com/query/latest).
+Chosen to manage API requests efficiently
+- Provides caching, retries, and background refetching
+- Enables smooth pagination with useInfiniteQuery
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### [`Zustand`](https://zustand-demo.pmnd.rs/).
+Lightweight state management library
+- Used to handle global app state like game sessions, theme (light/dark), and user preferences
 
-## Learn more
+### [`React Native Paper`](https://reactnativepaper.com/).
+UI component library
+- Provides consistent theming across light/dark mode.
+- Used for buttons, inputs, cards, and typography.
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## ✨ Features
+- Browse a list of popular games.
+- Trivia mode: guess the game based on image.
+- Dynamic light/dark theme support.
+- Smooth data fetching & caching with Tanstack Query.
