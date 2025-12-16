@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo/gamedex-transparent.jpeg" alt="GameDex Logo" width="320" />
+  <img src="assets/logo/gamedex-transparent.png" alt="GameDex Logo" width="320" />
 </p>
 
 # 🎮 Welcome
@@ -129,15 +129,15 @@ Chosen for:
 
 ### Game Browser & Trivia Experience
 
-| Home Screen | Game Details | Trivia Mode | Game Over |
-|-------------|-------------|-------------|-----------|
-| ![Game List](https://github.com/kelvinor29/gamedex/assets/screen-game-list.jpeg) | ![Trivia](https://github.com/kelvinor29/gamedex/assets/screen-game-dark-theme.jpeg) | ![Result](https://github.com/kelvinor29/gamedex/assets/screen-game-lost.jpeg) |
+| Game Details | Trivia Mode | Game Over |
+|-------------|-------------|-----------|
+| ![Game List](https://github.com/kelvinor29/gamedex/blob/main/assets/images/screen-game-list.jpeg) | ![Trivia](https://github.com/kelvinor29/gamedex/blob/main/assets/images/screen-game-dark-theme.jpeg) | ![Result](https://github.com/kelvinor29/gamedex/blob/main/assets/images/screen-game-lost.jpeg) |
 
 ### Theme Support
 
 | Light Mode | Dark Mode |
 |-----------|-----------|
-| ![Light](https://github.com/kelvinor29/gamedex/assets/screen-game-light-theme.jpeg) | ![Dark](https://github.com/kelvinor29/gamedex/assets/screen-game-dark-theme.jpeg) |
+| ![Light](https://github.com/kelvinor29/gamedex/blob/main/assets/images/screen-game-light-theme.jpeg) | ![Dark](https://github.com/kelvinor29/gamedex/blob/main/assets/images/screen-game-dark-theme.jpeg) |
 
 ---
 
@@ -211,7 +211,7 @@ Get your free API key at [rawg.io/api](https://rawg.io/api)
 gamedex/
 ├── app/                         # Expo Router navigation (file-based routing)
 ├── assets/
-│   ├── images/                  # App images and illustrations
+│   ├── images/screen-                  # App images and illustrations
 │   └── logo/                    # Logo assets
 ├── components/
 │   ├── form/                    # Form-related components
